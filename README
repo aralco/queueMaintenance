@@ -1,1 +1,35 @@
-This file was created by IntelliJ IDEA 12.1.4 for binding GitHub repository
+************************************************************************************************************************
+Queue Maintenance
+************************************************************************************************************************
+Requirements:
+    a. MySQL server 5.x installed and configured.
+    b. citi and citiuser schemas running onMySQL server.
+    c. Java SDK 1.6.0_37
+    d. Maven 3.0.x installed.
+
+Installation:
+    1. Make sure that “database.properties” file matches your databases configuration.
+    2. c.	Also make sure to check “config.properties” file, in order to allow the application, clean TransactionQueue
+    table less days before current date. Default value is set to seven, according to requirements document.
+    3. After that you should be ready to package the QueueMaintenance. To do it you should go to the terminal console
+    and under the folder “queueMaintenance” you must run the following commands:
+        - $mvn clean
+        - $mvn package
+    4.	If execution of the above processes are successful, a “target” folder will be created under
+    queueMaintenance folder.
+    5.	Assuming you are still on “queueMaintenance” folder run the following command in order to run
+    QueueMaintenance:
+        - $java –jar target/QueueMaintenance.one-jar.jar
+    6. In order to manually package a tarball file for production we must keep the following file structure:
+        - queueMaintenance (Folder)
+                |
+                |__ target (Folder)
+                |
+                |__ QueueMaintenance.one-jar.jar (Jar file)
+
+       Then you will be able to execute jar file as in previous step:
+        - $ java –jar target/QueueMaintenance.one-jar.jar
+    7.	At this point QueueMaintenance will delete data from transactionQueueDB. SUCCESS transactions from
+    TransactionQueue table and older than a week(assuming default configuration), will be deleted.
+
+Changes:
