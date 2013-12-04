@@ -103,6 +103,7 @@ public class TransactionQueueDaoImpl implements TransactionQueueDao {
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("delete from TransactionQueue " +
                                           "where status = :status "+
+                                          "and reported = true "+
                                           "and transmitTime < :date");
         query.setParameter("status", TransactionStatus.SUCCESS.name());
         query.setParameter("date", date);
